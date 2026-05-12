@@ -8,6 +8,27 @@ const server = new McpServer({
   version: "1.0.0",
 });
 
+// Tool 1: BMI Calculator
+server.tool(
+  "bmi_calculator",
+  "Calculate BMI given weight (kg) and height (cm)",
+  { weight_kg: z.number(), height_cm: z.number() },
+  async ({ weight_kg, height_cm }) => {
+    console.error(`[DEBUG] bmi_calculator called with weight=${weight_kg}kg, height=${height_cm}cm`);
+    const height_m = height_cm / 100;
+    const bmi = weight_kg / (height_m * height_m);
+    const rounded = Math.round(bmi * 10) / 10;
+    let category = "";
+    if (bmi < 18.5) category = "Underweight";
+    else if (bmi < 25) category = "Normal weight";
+    else if (bmi < 30) category = "Overweight";
+    else category = "Obese";
+    return {
+      content: [{ type: "text", text: `BMI: ${rounded} (${category})` }],
+    };
+  }
+);
+
 // Tools will be added here
 
 async function main() {
