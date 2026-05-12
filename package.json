@@ -1,0 +1,17 @@
+{
+  "name": "my-mcp-server",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Custom MCP server with study utility tools",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["mcp", "tools", "utility"],
+  "author": "becam",
+  "license": "ISC",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^4.4.3"
+  }
+}
