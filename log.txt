@@ -1,0 +1,53 @@
+➜  my-mcp-server git:(main) echo '{"jsonrpc":"2.0","id":0,"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{},"clientInfo":{"name":"test","version":"1.0"}}}' | node server.js
+[DEBUG] Server starting with stdio transport...
+[DEBUG] Server connected!
+{"result":{"protocolVersion":"2024-11-05","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"my-mcp-server","version":"1.0.0"}},"jsonrpc":"2.0","id":0}
+
+➜  my-mcp-server git:(main) echo '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}' | node server.js
+[DEBUG] Server starting with stdio transport...
+[DEBUG] Server connected!
+{"result":{"tools":[{"name":"bmi_calculator"},{"name":"celsius_to_fahrenheit"},{"name":"word_count"}]},"jsonrpc":"2.0","id":1}
+
+➜  my-mcp-server git:(main) echo '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"bmi_calculator","arguments":{"weight_kg":70,"height_cm":175}}}' | node server.js
+[DEBUG] Server starting with stdio transport...
+[DEBUG] Server connected!
+[DEBUG] bmi_calculator called with weight=70kg, height=175cm
+{"result":{"content":[{"type":"text","text":"BMI: 22.9 (Normal weight)"}]},"jsonrpc":"2.0","id":2}
+
+➜  my-mcp-server git:(main) echo '{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"celsius_to_fahrenheit","arguments":{"celsius":100}}}' | node server.js
+[DEBUG] Server starting with stdio transport...
+[DEBUG] Server connected!
+[DEBUG] celsius_to_fahrenheit called with celsius=100
+{"result":{"content":[{"type":"text","text":"100°C = 212°F"}]},"jsonrpc":"2.0","id":3}
+
+➜  my-mcp-server git:(main) echo '{"jsonrpc":"2.0","id":4,"method":"tools/call","params":{"name":"word_count","arguments":{"text":"Model Context Protocol is a powerful standard"}}}' | node server.js
+[DEBUG] Server starting with stdio transport...
+[DEBUG] Server connected!
+[DEBUG] word_count called with text="Model Context Protocol is a powerful standard"
+{"result":{"content":[{"type":"text","text":"Words: 7 | Characters: 45 | Characters (no spaces): 39"}]},"jsonrpc":"2.0","id":4}
+
+➜  my-mcp-server git:(main) opencode mcp list
+┌  MCP Servers
+│
+●  ✓ my_utility_mcp connected
+│      node /Users/reben/2026-1/oss/my-mcp-server/server.js
+│
+└  1 server(s)
+-------------
+Use bmi_calculator with weight_kg=70 and height_cm=175
+Thinking: The user wants me to use the bmi_calculator tool with the specified parameters.
+⚙ my_utility_mcp_bmi_calculator [weight_kg=70, height_cm=175]
+Thinking: Done.
+BMI: 22.9 — Normal weight
+
+Use celsius_to_fahrenheit with celsius=37
+Thinking: The user wants me to use the celsius_to_fahrenheit tool with celsius=37.
+⚙ my_utility_mcp_celsius_to_fahrenheit [celsius=37]
+Thinking: Done.
+37°C = 98.6°F
+
+Use word_count with text="Model Context Protocol is a powerful standard for AI tools"
+Thinking: The user wants me to use the word_count tool with the given text.
+⚙ my_utility_mcp_word_count [text=Model Context Protocol is a powerful standard for AI tools]
+Thinking: Done.
+Words: 10 | Characters: 58 | Characters (no spaces): 49
