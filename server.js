@@ -29,6 +29,20 @@ server.tool(
   }
 );
 
+// Tool 2: Celsius to Fahrenheit
+server.tool(
+  "celsius_to_fahrenheit",
+  "Convert temperature from Celsius to Fahrenheit",
+  { celsius: z.number() },
+  async ({ celsius }) => {
+    console.error(`[DEBUG] celsius_to_fahrenheit called with celsius=${celsius}`);
+    const fahrenheit = (celsius * 9) / 5 + 32;
+    return {
+      content: [{ type: "text", text: `${celsius}°C = ${fahrenheit}°F` }],
+    };
+  }
+);
+
 // Tools will be added here
 
 async function main() {
