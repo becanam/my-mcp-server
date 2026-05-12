@@ -43,7 +43,25 @@ server.tool(
   }
 );
 
-// Tools will be added here
+// Tool 3: Word Count
+server.tool(
+  "word_count",
+  "Count the number of words and characters in a given text",
+  { text: z.string() },
+  async ({ text }) => {
+    console.error(`[DEBUG] word_count called with text="${text}"`);
+    const words = text.trim().split(/\s+/).filter(Boolean);
+    const wordCount = words.length;
+    const charCount = text.length;
+    const charNoSpace = text.replace(/\s/g, "").length;
+    return {
+      content: [{
+        type: "text",
+        text: `Words: ${wordCount} | Characters: ${charCount} | Characters (no spaces): ${charNoSpace}`
+      }],
+    };
+  }
+);
 
 async function main() {
   console.error("[DEBUG] Server starting with stdio transport...");
