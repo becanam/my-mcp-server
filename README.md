@@ -60,4 +60,3 @@ opencode mcp list
 
 - [MCP Tutorial](https://github.com/hongsw/mcp_tutorial)
 - [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk)
-- [Protocol Version: 2024-11-05](https://spec.modelcontextprotocol.io)
